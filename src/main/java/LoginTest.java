@@ -33,16 +33,13 @@ public class LoginTest {
     private final String xpathErrorLoginWrong="/html/body/app-root/app-content-layout/div/div/div/div/div[2]/app-sign-in/div/div[1]/app-content-container/div/div/form/app-form-control[1]/div/div/app-error/div";
 
     WebDriver driver=null;
-    @Before
-    public void initBrowser(){
+
+    @Given("^open logInPage:(.*)$")
+    public void openLoginPage(String url)  {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.manage().window().maximize();
-    }
-
-    @Given("^open logInPage:(.*)$")
-    public void openLoginPage(String url)  {
         driver.get(url);
     }
 
@@ -89,7 +86,6 @@ public class LoginTest {
         }
         Assert.assertEquals(flag,result);
         driver.close();
-        driver.quit();
         return flag;
     }
 

@@ -1,9 +1,12 @@
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,37 +30,46 @@ public class SignUpTest {
     // private final String newLogin="li" + new Random().nextInt() + "@gmeil.com";
     public final String pushNotificationDivId = "toast-container";
     WebDriver driver=null;
-    @Before
-    public void initBrowser(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.manage().window().maximize();
+
+    /*@Before("@tag2,@tag3")
+            public void init(){
+
+    }*/
+
+    @AfterClass
+    public void closeDriver(){
+        driver.close();
     }
 
     @Given("^open SignUp page:(.*)$")
     public void openLoginPage(String url)  {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().window().maximize();
         driver.get(url);
+    }
+
+    @When("^fillInSignUpForm email OK:(.*),(.*),(.*),(.*),(.*),(.*)$")
+    public void fillInSignUpForm(String name,String surname, String phone,String birthDate,String password,String confirmpassword) {
+        WebElement xpath = driver.findElement(By.xpath(loginFieldXpath));
+        xpath.clear();
+        String newLoginUpdated= "test"+new Random().nextInt(100)*10 + "@gmeil.com";
+        xpath.sendKeys(newLoginUpdated);
+        driver.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
+        driver.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
+        driver.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
+        driver.findElement(By.xpath(birthdayFieldXpath)).clear();
+        driver.findElement(By.xpath(birthdayFieldXpath)).sendKeys(birthDate);
+        driver.findElement(By.xpath(passwordFieldXpath)).sendKeys(password);
+        driver.findElement(By.xpath(confirmpasswordFieldXpath)).sendKeys(confirmpassword);
     }
 
     @When("^fillInSignUpForm:(.*),(.*),(.*),(.*),(.*),(.*),(.*)$")
     public void fillInSignUpForm(String newLogin,String name,String surname, String phone,String birthDate,String password,String confirmpassword) {
         WebElement xpath = driver.findElement(By.xpath(loginFieldXpath));
         xpath.clear();
-        String newLoginUpdated="";
-
-        switch (newLogin){
-            case "": newLoginUpdated="";
-            break;
-            case "ok": newLoginUpdated= "test"+new Random().nextInt(100)*10 + "@gmeil.com";
-            break;
-            case "existed": newLoginUpdated="lilipyt@gmail.com";
-            break;
-            case ".ru":newLoginUpdated="lilipyt@mail.ru";
-            break;
-            default:newLoginUpdated="";
-        }
-        xpath.sendKeys(newLoginUpdated);
+        xpath.sendKeys(newLogin);
         driver.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
         driver.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
         driver.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
@@ -77,22 +89,15 @@ public class SignUpTest {
             public void checkResult(boolean result, String testName){
         boolean flag = true;
 
+
         try{ driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
             WebElement element = driver.findElement(By.id(pushNotificationDivId));}
         catch (Exception e){
             flag = false;
-            driver.close();
-            Assert.assertEquals(flag,result);
-
-            //return flag;
         }
-        driver.close();
         Assert.assertEquals(flag,result);
-        //return flag;
-
+        System.out.println(testName);
+        driver.close();
     }
-
-
-
 
 }
