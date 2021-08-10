@@ -34,13 +34,14 @@ public class LoginTest {
 
     WebDriver driver=null;
 
+
     @Given("^open logInPage:(.*)$")
     public void openLoginPage(String url)  {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(Main.url()+url);
     }
 
     @When("^type to input login text:(.*)$")
@@ -81,7 +82,6 @@ public class LoginTest {
 
         if (flag) {
             driver.findElement(By.xpath(xpathForLogout)).click();
-            //Thread.sleep(500);
             //System.out.println("logout" );
         }
         Assert.assertEquals(flag,result);

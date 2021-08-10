@@ -31,10 +31,7 @@ public class SignUpTest {
     public final String pushNotificationDivId = "toast-container";
     WebDriver driver=null;
 
-    /*@Before("@tag2,@tag3")
-            public void init(){
 
-    }*/
 
     @AfterClass
     public void closeDriver(){
@@ -47,7 +44,7 @@ public class SignUpTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(Main.url()+url);
     }
 
     @When("^fillInSignUpForm email OK:(.*),(.*),(.*),(.*),(.*),(.*)$")
@@ -96,7 +93,7 @@ public class SignUpTest {
             flag = false;
         }
         Assert.assertEquals(flag,result);
-        System.out.println(testName);
+        //System.out.println(testName);
         driver.close();
     }
 
