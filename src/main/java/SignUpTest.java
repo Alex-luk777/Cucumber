@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,22 +30,25 @@ public class SignUpTest {
     private final String submitFieldXpath = "/html/body/app-root/app-content-layout/div/div/div/div/div[2]/app-sign-up/div/div[1]/app-content-container/div/div/form/button";
     // private final String newLogin="li" + new Random().nextInt() + "@gmeil.com";
     public final String pushNotificationDivId = "toast-container";
-    WebDriver driver=null;
+    WebDriver driver=Main.driver();
 
+   /* @BeforeClass
+    public void beforeClass() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().window().maximize();
+    }*/
 
 
     @AfterClass
-    public void closeDriver(){
+    public void afterClass(){
         driver.close();
     }
 
     @Given("^open SignUp page:(.*)$")
     public void openLoginPage(String url)  {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.manage().window().maximize();
-        driver.get(Main.url()+url);
+        driver.get(Main.URL_CORE+url);
     }
 
     @When("^fillInSignUpForm email OK:(.*),(.*),(.*),(.*),(.*),(.*)$")

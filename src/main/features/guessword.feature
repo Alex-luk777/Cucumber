@@ -52,6 +52,19 @@ Feature: LogIn test with combination fo logins and passwords
       | lilipyt           | Alex     | Luk         | 0654324343 | 01.01.9      | 111111111      | 111111111       | false         | mo gmail.com  |
       |                   | Alex     | Luk         | 0654324343 | 01.01.9      | 111111111      | 111111111       | false         | login empty   |
 
+  @tag4
+  Scenario Outline: "Buttons chek prior logIn"
+    Given open startPage:/start
+    Then button is displayed check:<id>,<assertUrl>
+    Examples:
+      | Button name     | id            | assertUrl  |
+      | signIn          | signIn        | /sign-in   |
+      | signUp          | signUp        | /sign-up   |
+      | system overview | dashboard     | /dashboard |
+      | overview_video  | overviewVideo | /dashboard |
+      | public_info     | publicInfo    | /dashboard |
+      | contacts        | contacts      | /contacts  |
+
 
 
 

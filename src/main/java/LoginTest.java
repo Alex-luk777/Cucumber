@@ -3,7 +3,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -32,16 +32,15 @@ public class LoginTest {
 
     private final String xpathErrorLoginWrong="/html/body/app-root/app-content-layout/div/div/div/div/div[2]/app-sign-in/div/div[1]/app-content-container/div/div/form/app-form-control[1]/div/div/app-error/div";
 
-    WebDriver driver=null;
-
+    WebDriver driver=Main.driver();
+    @AfterClass
+    public void afterClass(){
+        driver.close();
+    }
 
     @Given("^open logInPage:(.*)$")
     public void openLoginPage(String url)  {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.manage().window().maximize();
-        driver.get(Main.url()+url);
+        driver.get(Main.URL_CORE+url);
     }
 
     @When("^type to input login text:(.*)$")

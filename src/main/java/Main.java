@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +29,17 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Main {
-    public static String url() {
-      return "https://bpla.mpsdevelopment.com";
+
+    public static final String URL_CORE = "https://bpla.mpsdevelopment.com";
+
+   public static WebDriver driver() {
+       System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+       //System.setProperty("webdriver.firefox.driver", "C:\\Users\\Alex\\Desktop\\BPLA_main\\src\\WebDriver\\geckodriver.exe");
+       //WebDriver driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+        driver.manage().window().maximize();
+        return driver;
     }
 
 
