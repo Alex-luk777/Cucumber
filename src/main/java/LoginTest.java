@@ -37,8 +37,9 @@ public class LoginTest {
 
     @Given("^open logInPage:(.*)$")
     public void openLoginPage(String url)  {
-
+        System.out.println(Main.URL_CORE+url);
         driver.get(Main.URL_CORE+url);
+
     }
 
     @When("^type to input login text:(.*)$")
