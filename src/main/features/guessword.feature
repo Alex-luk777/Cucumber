@@ -87,12 +87,12 @@ Feature: LogIn,SignUp,Recover password and buttons,links check
       Given open startPage:/sign-in
       Then button is displayed check:<id>,<assertUrl>
       Examples:
-        | Button name     | id       | assertUrl        |
-        | signUp          | signUp   | /sign-up         |
-        | forgot password | ------   | /forgot-password |
-        | contacts        | contacts | /contacts        |
+        | Button name     | id             | assertUrl        |
+        | signUp          | signUp         | /sign-up         |
+        | forgot password | forgotPassword | /forgot-password |
+        | contacts        | contacts       | /contacts        |
 
-    @tag8
+  @tag8
     Scenario Outline: "Buttons chek when Forgot Password"
       Given open startPage:/forgot-password
       Then button is displayed check:<id>,<assertUrl>
