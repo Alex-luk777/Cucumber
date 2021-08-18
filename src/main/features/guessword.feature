@@ -1,4 +1,4 @@
-Feature: LogIn test with combination fo logins and passwords
+Feature: LogIn,SignUp,Recover password and buttons,links check
 
   @tag1
   Scenario Outline: "Login and password combinations"
@@ -8,8 +8,8 @@ Feature: LogIn test with combination fo logins and passwords
     And press element with value Submit
     Then The element with tag Welcome should exist:<positiveTest>,<test>
     Examples:
-      | test              | login                | password | positiveTest |
-      | login-wrong pw-ok | lilisdfpyt@gmail.com | 11111111 | false        |
+      | test                 | login                | password     | positiveTest |
+      | login-wrong pw-ok    | lilisdfpyt@gmail.com | 11111111     | false        |
       | login-ok pw-wrong    | lilipyt@gmail.com    | 111111       | false        |
       | login-wrong pw-wrong | lilidfpyt@gmail.com  | 11sdfg111111 | false        |
       | login-empty pw-ok    |                      | 11111111     | false        |
