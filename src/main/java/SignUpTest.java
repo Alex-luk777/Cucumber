@@ -30,66 +30,65 @@ public class SignUpTest {
     // private final String newLogin="li" + new Random().nextInt() + "@gmeil.com";
     public final String pushNotificationDivId = "toast-container";
 
-    WebDriver driver1=Main.driver();
+    WebDriver driver=Main.driver();
 
     @AfterClass
     public void closeDriver(){
-        driver1.close();
+        driver.close();
     }
 
     @Given("^open SignUp page:(.*)$")
     public void openLoginPage(String url)  {
-        driver1.get(Main.URL_CORE+url);
+        driver.get(Main.URL_CORE+url);
     }
 
     @When("^fillInSignUpForm email OK:(.*),(.*),(.*),(.*),(.*),(.*)$")
     public void fillInSignUpForm(String name,String surname, String phone,String birthDate,String password,String confirmpassword) {
-        WebElement xpath = driver1.findElement(By.xpath(loginFieldXpath));
+        WebElement xpath = driver.findElement(By.xpath(loginFieldXpath));
         xpath.clear();
         String newLoginUpdated= "test"+new Random().nextInt(100)*10 + "@gmeil.com";
         xpath.sendKeys(newLoginUpdated);
-        driver1.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
-        driver1.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
-        driver1.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
-        driver1.findElement(By.xpath(birthdayFieldXpath)).clear();
-        driver1.findElement(By.xpath(birthdayFieldXpath)).sendKeys(birthDate);
-        driver1.findElement(By.xpath(passwordFieldXpath)).sendKeys(password);
-        driver1.findElement(By.xpath(confirmpasswordFieldXpath)).sendKeys(confirmpassword);
+        driver.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
+        driver.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
+        driver.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
+        driver.findElement(By.xpath(birthdayFieldXpath)).clear();
+        driver.findElement(By.xpath(birthdayFieldXpath)).sendKeys(birthDate);
+        driver.findElement(By.xpath(passwordFieldXpath)).sendKeys(password);
+        driver.findElement(By.xpath(confirmpasswordFieldXpath)).sendKeys(confirmpassword);
     }
 
     @When("^fillInSignUpForm:(.*),(.*),(.*),(.*),(.*),(.*),(.*)$")
     public void fillInSignUpForm(String newLogin,String name,String surname, String phone,String birthDate,String password,String confirmpassword) {
-        WebElement xpath = driver1.findElement(By.xpath(loginFieldXpath));
+        WebElement xpath = driver.findElement(By.xpath(loginFieldXpath));
         xpath.clear();
         xpath.sendKeys(newLogin);
-        driver1.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
-        driver1.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
-        driver1.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
-        driver1.findElement(By.xpath(birthdayFieldXpath)).clear();
-        driver1.findElement(By.xpath(birthdayFieldXpath)).sendKeys(birthDate);
-        driver1.findElement(By.xpath(passwordFieldXpath)).sendKeys(password);
-        driver1.findElement(By.xpath(confirmpasswordFieldXpath)).sendKeys(confirmpassword);
+        driver.findElement(By.xpath(nameFieldXpath)).sendKeys(name);
+        driver.findElement(By.xpath(surnameFieldXpath)).sendKeys(surname);
+        driver.findElement(By.xpath(telFieldXpath)).sendKeys(phone);
+        driver.findElement(By.xpath(birthdayFieldXpath)).clear();
+        driver.findElement(By.xpath(birthdayFieldXpath)).sendKeys(birthDate);
+        driver.findElement(By.xpath(passwordFieldXpath)).sendKeys(password);
+        driver.findElement(By.xpath(confirmpasswordFieldXpath)).sendKeys(confirmpassword);
     }
 
     @And("^fill checkbox and press element with value Submit$")
     public void checkBoxandSubmit(){
-        driver1.findElement(By.xpath(iagreeboxFieldXpath)).click();
-        driver1.findElement(By.xpath(submitFieldXpath)).click();
+        driver.findElement(By.xpath(iagreeboxFieldXpath)).click();
+        driver.findElement(By.xpath(submitFieldXpath)).click();
     }
 
     @Then("^Catch Pushnotification:(.*),(.*)$")
     public void checkResult(boolean result, String testName){
         boolean flag = true;
 
-
-        try{ driver1.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
-            WebElement element = driver1.findElement(By.id(pushNotificationDivId));}
+        try{ driver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
+            WebElement element = driver.findElement(By.id(pushNotificationDivId));}
         catch (Exception e){
             flag = false;
         }
         Assert.assertEquals(flag,result);
         //System.out.println(testName);
-        driver1.close();
+        driver.close();
     }
 
 }

@@ -22,9 +22,12 @@ public class ButtonCheck {
     public void afterClass(){driver.close();}
 
     @Given("^open startPage:(.*)$")
-    public void openPage(String url){
+    public void openPage1(String url){
         driver.get(Main.URL_CORE+url);
     }
+
+
+
     @Then("^button is displayed check:(.*),(.*)$")
     public void pressBtn(String buttonId, String assertUrl1) throws InterruptedException {
        try {WebElement href1 = driver.findElement(By.id(buttonId));

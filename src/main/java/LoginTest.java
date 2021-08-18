@@ -49,6 +49,7 @@ public class LoginTest {
         webElementLogin.sendKeys(login);
     }
 
+
     @And("^type to input with name password text:(.*)$")
     public void fillInPassword(String password){
         driver.findElement(By.id("password")).clear();
@@ -56,7 +57,7 @@ public class LoginTest {
 
     }
     @And("^press element with value Submit$")
-    public void submit(){
+    public void submitBtnPress(){
         driver.findElement(By.xpath(xpathForButtonSubmit)).click();
     }
 
